@@ -578,7 +578,15 @@ class ReadingMasteryApp(MDApp):
         return Builder.load_string(KV)
 
     def open_local_pdf(self, filename):
-        assets_path = r"C:\Users\Srilaxmi\PycharmProjects\ReadingMasteryApp\assets"
+        # This works on both Windows and Android
+        if getattr(sys, 'frozen', False):
+            # If running as a bundled app
+            base_path = os.path.dirname(sys.executable)
+        else:
+            # If running from source
+            base_path = os.path.dirname(__file__)
+            
+        assets_path = os.path.join(base_path, "assets")
         filepath = os.path.join(assets_path, filename)
         if os.path.exists(filepath):
             webbrowser.open(filepath)
@@ -727,4 +735,5 @@ MDCard:
         else: self.root.current = 'welcome'
 
 if __name__ == '__main__':
+
     ReadingMasteryApp().run()
