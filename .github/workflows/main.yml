@@ -3,20 +3,19 @@ on: [push, workflow_dispatch]
 
 jobs:
   build:
-    runs-on: ubuntu-latest
-
+    runs-on: ubuntu-22.04
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout code
+        uses: actions/checkout@v4
 
-      - name: Build with Buildozer
-        # Using the official Kivy Buildozer action
-        uses: kivy/buildozer-action@v1
+      - name: Build APK with Buildozer
+        # Using the specific version tag for the official Kivy action
+        uses: kivy/buildozer-action@master
         with:
           buildozer_version: master
           python_version: 3.11
 
       - name: Upload APK
-        # Updated to v4 to fix the deprecation error
         uses: actions/upload-artifact@v4
         with:
           name: ReadingMasteryApp-APK
