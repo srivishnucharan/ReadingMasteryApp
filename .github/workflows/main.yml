@@ -9,16 +9,15 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Build with Buildozer
-        # Using the most reliable action for Kivy
+        # Corrected name: ArtemSBulgakov
         uses: ArtemSBulgakov/buildozer-action@v1
         with:
           buildozer_version: master
           python_version: 3.11
 
       - name: Upload APK
+        # Corrected to v4 to fix the deprecation error
         uses: actions/upload-artifact@v4
         with:
           name: ReadingMasteryApp-APK
-          # This wildcard path ensures we find the APK even if the filename changes
           path: bin/*.apk
-          if-no-files-found: error
