@@ -578,23 +578,19 @@ class ReadingMasteryApp(MDApp):
         return Builder.load_string(KV)
 
     def open_local_pdf(self, filename):
-        # This works on both Windows and Android
-        if getattr(sys, 'frozen', False):
-            # If running as a bundled app
-            base_path = os.path.dirname(sys.executable)
-        else:
-            # If running from source
-            base_path = os.path.dirname(__file__)
-            
+        # This replaces the hardcoded C:\Users\... path
+        # It finds the 'assets' folder relative to where the app is installed
+        base_path = os.path.dirname(__file__)
         assets_path = os.path.join(base_path, "assets")
+        
         filepath = os.path.join(assets_path, filename)
         if os.path.exists(filepath):
             webbrowser.open(filepath)
         else:
             self.dialog = MDDialog(
                 title="File Not Found",
-                text=f"Check if '{filename}' is inside:\n{assets_path}",
-                buttons=[MDFlatButton(text="OK", text_color=(0.15, 0.18, 0.45, 1), on_release=lambda x: self.dialog.dismiss())]
+                text=f"Cannot find {filename} in assets folder.",
+                buttons=[MDFlatButton(text="OK", on_release=lambda x: self.dialog.dismiss())]
             )
             self.dialog.open()
 
@@ -737,3 +733,4 @@ MDCard:
 if __name__ == '__main__':
 
     ReadingMasteryApp().run()
+
