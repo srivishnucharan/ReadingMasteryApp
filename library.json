@@ -1,0 +1,347 @@
+{
+  "Fantasy": {
+    "Novice": [
+      {"title": "Dragon Masters", "link": "https://www.amazon.in/s?k=Dragon+Masters"},
+      {"title": "Magic Tree House", "link": "https://www.amazon.in/s?k=Magic+Tree+House"},
+      {"title": "The Dragonsitter", "link": "https://www.amazon.in/s?k=The+Dragonsitter"},
+      {"title": "Notebook of Doom", "link": "https://www.amazon.in/s?k=Notebook+of+Doom"},
+      {"title": "My Father's Dragon", "link": "https://www.amazon.in/s?k=My+Father+Dragon"}
+    ],
+    "Intermediate": [
+      {"title": "Harry Potter 1", "link": "https://www.amazon.in/s?k=Harry+Potter+1"},
+      {"title": "Percy Jackson 1", "link": "https://www.amazon.in/s?k=Percy+Jackson+1"},
+      {"title": "Wings of Fire", "link": "https://www.amazon.in/s?k=Wings+of+Fire"},
+      {"title": "Land of Stories", "link": "https://www.amazon.in/s?k=Land+of+Stories"},
+      {"title": "Amari & Night Brothers", "link": "https://www.amazon.in/s?k=Amari+Night+Brothers"}
+    ],
+    "Advanced": [
+      {"title": "The Hobbit", "link": "https://www.amazon.in/s?k=The+Hobbit"},
+      {"title": "Inkheart", "link": "https://www.amazon.in/s?k=Inkheart"},
+      {"title": "The Golden Compass", "link": "https://www.amazon.in/s?k=Golden+Compass"},
+      {"title": "Eragon", "link": "https://www.amazon.in/s?k=Eragon"},
+      {"title": "The Fellowship of the Ring", "link": "https://www.amazon.in/s?k=Fellowship+of+the+Ring"}
+    ]
+  },
+  "Mystery": {
+    "Novice": [
+      {"title": "Nate the Great", "link": "https://www.amazon.in/s?k=Nate+the+Great"},
+      {"title": "Cam Jansen", "link": "https://www.amazon.in/s?k=Cam+Jansen"},
+      {"title": "A to Z Mysteries", "link": "https://www.amazon.in/s?k=A+to+Z+Mysteries"},
+      {"title": "Encyclopedia Brown", "link": "https://www.amazon.in/s?k=Encyclopedia+Brown"},
+      {"title": "The Boxcar Children", "link": "https://www.amazon.in/s?k=Boxcar+Children"}
+    ],
+    "Intermediate": [
+      {"title": "The Westing Game", "link": "https://www.amazon.in/s?k=Westing+Game"},
+      {"title": "Lemoncello's Library", "link": "https://www.amazon.in/s?k=Lemoncello+Library"},
+      {"title": "Nancy Drew", "link": "https://www.amazon.in/s?k=Nancy+Drew"},
+      {"title": "The Hardy Boys", "link": "https://www.amazon.in/s?k=Hardy+Boys"},
+      {"title": "Three Times Lucky", "link": "https://www.amazon.in/s?k=Three+Times+Lucky"}
+    ],
+    "Advanced": [
+      {"title": "Sherlock Holmes", "link": "https://www.amazon.in/s?k=Sherlock+Holmes+Children"},
+      {"title": "One of Us Is Lying", "link": "https://www.amazon.in/s?k=One+of+Us+Is+Lying"},
+      {"title": "Truly Devious", "link": "https://www.amazon.in/s?k=Truly+Devious"},
+      {"title": "And Then There Were None", "link": "https://www.amazon.in/s?k=And+Then+There+Were+None"},
+      {"title": "Good Girl's Guide to Murder", "link": "https://www.amazon.in/s?k=Good+Girls+Guide+to+Murder"}
+    ]
+  },
+  "Science": {
+    "Novice": [
+      {"title": "Magic School Bus", "link": "https://www.amazon.in/s?k=Magic+School+Bus"},
+      {"title": "Who Was Albert Einstein?", "link": "https://www.amazon.in/s?k=Who+Was+Albert+Einstein"},
+      {"title": "National Geographic Kids", "link": "https://www.amazon.in/s?k=National+Geographic+Kids"},
+      {"title": "Dinosaur Lady", "link": "https://www.amazon.in/s?k=Dinosaur+Lady"},
+      {"title": "The Boy Who Harnessed the Wind", "link": "https://www.amazon.in/s?k=Boy+Who+Harnessed+the+Wind"}
+    ],
+    "Intermediate": [
+      {"title": "George's Secret Key", "link": "https://www.amazon.in/s?k=George+Secret+Key"},
+      {"title": "Horrible Science", "link": "https://www.amazon.in/s?k=Horrible+Science"},
+      {"title": "The Way Things Work", "link": "https://www.amazon.in/s?k=The+Way+Things+Work"},
+      {"title": "Women in Science", "link": "https://www.amazon.in/s?k=Women+in+Science"},
+      {"title": "Brain: Your Body's Control Center", "link": "https://www.amazon.in/s?k=Brain+Kids+Science"}
+    ],
+    "Advanced": [
+      {"title": "Astrophysics for Young People", "link": "https://www.amazon.in/s?k=Astrophysics+for+Young+People"},
+      {"title": "Cosmos (Young Readers)", "link": "https://www.amazon.in/s?k=Cosmos+Carl+Sagan"},
+      {"title": "A Brief History of Time", "link": "https://www.amazon.in/s?k=Brief+History+of+Time"},
+      {"title": "Lab Girl", "link": "https://www.amazon.in/s?k=Lab+Girl+Hope+Jahren"},
+      {"title": "The Immortal Life of Henrietta Lacks", "link": "https://www.amazon.in/s?k=Henrietta+Lacks"}
+    ]
+  },
+  "History": {
+    "Novice": [
+      {"title": "Who Was Abraham Lincoln?", "link": "https://www.amazon.in/s?k=Who+Was+Abraham+Lincoln"},
+      {"title": "The Story of Titanic", "link": "https://www.amazon.in/s?k=Story+of+Titanic+Kids"},
+      {"title": "Magic Tree House: Fact Tracker", "link": "https://www.amazon.in/s?k=Magic+Tree+House+Fact+Tracker"},
+      {"title": "Stone Age Boy", "link": "https://www.amazon.in/s?k=Stone+Age+Boy"},
+      {"title": "If You Lived in Colonial Times", "link": "https://www.amazon.in/s?k=If+You+Lived+in+Colonial+Times"}
+    ],
+    "Intermediate": [
+      {"title": "I Survived (Series)", "link": "https://www.amazon.in/s?k=I+Survived+Books"},
+      {"title": "Brown Girl Dreaming", "link": "https://www.amazon.in/s?k=Brown+Girl+Dreaming"},
+      {"title": "The War that Saved My Life", "link": "https://www.amazon.in/s?k=War+that+Saved+My+Life"},
+      {"title": "Inside Out & Back Again", "link": "https://www.amazon.in/s?k=Inside+Out+and+Back+Again"},
+      {"title": "Number the Stars", "link": "https://www.amazon.in/s?k=Number+the+Stars"}
+    ],
+    "Advanced": [
+      {"title": "The Book Thief", "link": "https://www.amazon.in/s?k=The+Book+Thief"},
+      {"title": "Anne Frank: Diary of a Young Girl", "link": "https://www.amazon.in/s?k=Anne+Frank+Diary"},
+      {"title": "Salt to the Sea", "link": "https://www.amazon.in/s?k=Salt+to+the+Sea"},
+      {"title": "Refugee", "link": "https://www.amazon.in/s?k=Refugee+Alan+Gratz"},
+      {"title": "The Boy in the Striped Pyjamas", "link": "https://www.amazon.in/s?k=Boy+in+Striped+Pyjamas"}
+    ]
+  },
+  "Space": {
+    "Novice": [
+      {"title": "There's No Place Like Space", "link": "https://www.amazon.in/s?k=Theres+No+Place+Like+Space"},
+      {"title": "Moon! Earth's Best Friend", "link": "https://www.amazon.in/s?k=Moon+Earths+Best+Friend"},
+      {"title": "I am Neil Armstrong", "link": "https://www.amazon.in/s?k=I+am+Neil+Armstrong"},
+      {"title": "Astronaut in Training", "link": "https://www.amazon.in/s?k=Astronaut+in+Training"},
+      {"title": "Space Dictionary", "link": "https://www.amazon.in/s?k=Space+Dictionary+Kids"}
+    ],
+    "Intermediate": [
+      {"title": "Space Encyclopedia", "link": "https://www.amazon.in/s?k=National+Geographic+Space+Encyclopedia"},
+      {"title": "Hidden Figures (Young Readers)", "link": "https://www.amazon.in/s?k=Hidden+Figures+Young+Readers"},
+      {"title": "Packing for Mars (Young Readers)", "link": "https://www.amazon.in/s?k=Packing+for+Mars+Kids"},
+      {"title": "The Martian (Young Readers)", "link": "https://www.amazon.in/s?k=The+Martian+Young+Readers"},
+      {"title": "Project Hail Mary", "link": "https://www.amazon.in/s?k=Project+Hail+Mary"}
+    ],
+    "Advanced": [
+      {"title": "Endurance", "link": "https://www.amazon.in/s?k=Endurance+Scott+Kelly"},
+      {"title": "Pale Blue Dot", "link": "https://www.amazon.in/s?k=Pale+Blue+Dot+Sagan"},
+      {"title": "Brief Answers to the Big Questions", "link": "https://www.amazon.in/s?k=Brief+Answers+Big+Questions"},
+      {"title": "The Right Stuff", "link": "https://www.amazon.in/s?k=The+Right+Stuff"},
+      {"title": "Interstellar", "link": "https://www.amazon.in/s?k=Interstellar+Book"}
+    ]
+  },
+  "Biography": {
+    "Novice": [
+      {"title": "Who Was Walt Disney?", "link": "https://www.amazon.in/s?k=Who+Was+Walt+Disney"},
+      {"title": "I am Rosa Parks", "link": "https://www.amazon.in/s?k=I+am+Rosa+Parks"},
+      {"title": "The Story of Gandhi", "link": "https://www.amazon.in/s?k=Story+of+Gandhi+Kids"},
+      {"title": "Who Was Malala Yousafzai?", "link": "https://www.amazon.in/s?k=Who+Was+Malala"},
+      {"title": "Who Was Steve Jobs?", "link": "https://www.amazon.in/s?k=Who+Was+Steve+Jobs"}
+    ],
+    "Intermediate": [
+      {"title": "I am Malala (YRE)", "link": "https://www.amazon.in/s?k=I+am+Malala+Young+Readers"},
+      {"title": "Steve Jobs: Insanely Great", "link": "https://www.amazon.in/s?k=Steve+Jobs+Graphic+Biography"},
+      {"title": "The Boy Who Harnessed the Wind", "link": "https://www.amazon.in/s?k=Boy+Who+Harnessed+the+Wind"},
+      {"title": "Elon Musk (Young Readers)", "link": "https://www.amazon.in/s?k=Elon+Musk+Young+Readers"},
+      {"title": "Wings of Fire (APJ Abdul Kalam)", "link": "https://www.amazon.in/s?k=Wings+of+Fire+Kalam"}
+    ],
+    "Advanced": [
+      {"title": "Becoming (Adapted)", "link": "https://www.amazon.in/s?k=Becoming+Michelle+Obama+Young+Readers"},
+      {"title": "The Diary of a Young Girl", "link": "https://www.amazon.in/s?k=Anne+Frank+Diary"},
+      {"title": "Long Walk to Freedom", "link": "https://www.amazon.in/s?k=Long+Walk+to+Freedom+Kids"},
+      {"title": "Man's Search for Meaning", "link": "https://www.amazon.in/s?k=Mans+Search+for+Meaning"},
+      {"title": "Shoe Dog (Young Readers)", "link": "https://www.amazon.in/s?k=Shoe+Dog+Young+Readers"}
+    ]
+  },
+  "Adventure": {
+    "Novice": [
+      {"title": "Hatchet", "link": "https://www.amazon.in/s?k=Hatchet+Gary+Paulsen"},
+      {"title": "The Island of Blue Dolphins", "link": "https://www.amazon.in/s?k=Island+of+Blue+Dolphins"},
+      {"title": "The Wild Robot", "link": "https://www.amazon.in/s?k=The+Wild+Robot"},
+      {"title": "Call of the Wild", "link": "https://www.amazon.in/s?k=Call+of+the+Wild+Kids"},
+      {"title": "Kensuke's Kingdom", "link": "https://www.amazon.in/s?k=Kensukes+Kingdom"}
+    ],
+    "Intermediate": [
+      {"title": "Peak", "link": "https://www.amazon.in/s?k=Peak+Roland+Smith"},
+      {"title": "The Explorer", "link": "https://www.amazon.in/s?k=The+Explorer+Katherine+Rundell"},
+      {"title": "Alone", "link": "https://www.amazon.in/s?k=Alone+Megan+Freeman"},
+      {"title": "Life of Pi", "link": "https://www.amazon.in/s?k=Life+of+Pi"},
+      {"title": "The Maze Runner", "link": "https://www.amazon.in/s?k=Maze+Runner"}
+    ],
+    "Advanced": [
+      {"title": "Into the Wild", "link": "https://www.amazon.in/s?k=Into+the+Wild"},
+      {"title": "The Lost World", "link": "https://www.amazon.in/s?k=The+Lost+World+Doyle"},
+      {"title": "Treasure Island", "link": "https://www.amazon.in/s?k=Treasure+Island"},
+      {"title": "Odyssey", "link": "https://www.amazon.in/s?k=The+Odyssey+Kids"},
+      {"title": "Robinson Crusoe", "link": "https://www.amazon.in/s?k=Robinson+Crusoe"}
+    ]
+  },
+  "Nature": {
+    "Novice": [
+      {"title": "The Tiny Seed", "link": "https://www.amazon.in/s?k=The+Tiny+Seed+Eric+Carle"},
+      {"title": "National Geographic Kids: Trees", "link": "https://www.amazon.in/s?k=National+Geographic+Kids+Trees"},
+      {"title": "Over and Under the Pond", "link": "https://www.amazon.in/s?k=Over+and+Under+the+Pond"},
+      {"title": "Caterpillar to Butterfly", "link": "https://www.amazon.in/s?k=Caterpillar+to+Butterfly+Book"},
+      {"title": "The Honeybee", "link": "https://www.amazon.in/s?k=The+Honeybee+Kirsten+Hall"}
+    ],
+    "Intermediate": [
+      {"title": "The One and Only Ivan", "link": "https://www.amazon.in/s?k=The+One+and+Only+Ivan"},
+      {"title": "Pax", "link": "https://www.amazon.in/s?k=Pax+Sara+Pennypacker"},
+      {"title": "My Side of the Mountain", "link": "https://www.amazon.in/s?k=My+Side+of+the+Mountain"},
+      {"title": "The Hidden Life of Trees (Young Readers)", "link": "https://www.amazon.in/s?k=Hidden+Life+of+Trees+Kids"},
+      {"title": "Hoot", "link": "https://www.amazon.in/s?k=Hoot+Carl+Hiaasen"}
+    ],
+    "Advanced": [
+      {"title": "Silent Spring", "link": "https://www.amazon.in/s?k=Silent+Spring+Rachel+Carson"},
+      {"title": "Braiding Sweetgrass", "link": "https://www.amazon.in/s?k=Braiding+Sweetgrass"},
+      {"title": "A Walk in the Woods", "link": "https://www.amazon.in/s?k=A+Walk+in+the+Woods+Bill+Bryson"},
+      {"title": "The Overstory", "link": "https://www.amazon.in/s?k=The+Overstory+Richard+Powers"},
+      {"title": "Desert Solitaire", "link": "https://www.amazon.in/s?k=Desert+Solitaire"}
+    ]
+  },
+  "Sports": {
+    "Novice": [
+      {"title": "The Berenstain Bears: Play Ball", "link": "https://www.amazon.in/s?k=Berenstain+Bears+Play+Ball"},
+      {"title": "Dino-Basketball", "link": "https://www.amazon.in/s?k=Dino-Basketball"},
+      {"title": "Froggy Plays Soccer", "link": "https://www.amazon.in/s?k=Froggy+Plays+Soccer"},
+      {"title": "Goodnight Football", "link": "https://www.amazon.in/s?k=Goodnight+Football"},
+      {"title": "The Quickest Kid in Clarksville", "link": "https://www.amazon.in/s?k=Quickest+Kid+in+Clarksville"}
+    ],
+    "Intermediate": [
+      {"title": "The Crossover", "link": "https://www.amazon.in/s?k=The+Crossover+Kwame+Alexander"},
+      {"title": "Ghost", "link": "https://www.amazon.in/s?k=Ghost+Jason+Reynolds"},
+      {"title": "Wonder Horse", "link": "https://www.amazon.in/s?k=Wonder+Horse+Book"},
+      {"title": "Roller Girl", "link": "https://www.amazon.in/s?k=Roller+Girl+Graphic+Novel"},
+      {"title": "The Underdogs", "link": "https://www.amazon.in/s?k=The+Underdogs+Mike+Lupica"}
+    ],
+    "Advanced": [
+      {"title": "Moneyball", "link": "https://www.amazon.in/s?k=Moneyball+Michael+Lewis"},
+      {"title": "The Boys in the Boat", "link": "https://www.amazon.in/s?k=Boys+in+the+Boat"},
+      {"title": "Open: An Autobiography", "link": "https://www.amazon.in/s?k=Open+Andre+Agassi"},
+      {"title": "Friday Night Lights", "link": "https://www.amazon.in/s?k=Friday+Night+Lights+Book"},
+      {"title": "Into Thin Air", "link": "https://www.amazon.in/s?k=Into+Thin+Air"}
+    ]
+  },
+  "Technology": {
+    "Novice": [
+      {"title": "How Computers Work", "link": "https://www.amazon.in/s?k=How+Computers+Work+Kids"},
+      {"title": "Hello Ruby: Journey Inside the Computer", "link": "https://www.amazon.in/s?k=Hello+Ruby+Computer"},
+      {"title": "Ada Lovelace, Poet of Science", "link": "https://www.amazon.in/s?k=Ada+Lovelace+Poet+of+Science"},
+      {"title": "The Kids' Book of Coding", "link": "https://www.amazon.in/s?k=Kids+Book+of+Coding"},
+      {"title": "Secret Coders", "link": "https://www.amazon.in/s?k=Secret+Coders+Book"}
+    ],
+    "Intermediate": [
+      {"title": "Girls Who Code", "link": "https://www.amazon.in/s?k=Girls+Who+Code+Book"},
+      {"title": "The Gadget War", "link": "https://www.amazon.in/s?k=The+Gadget+War"},
+      {"title": "Nick and Tesla's High-Voltage Laboratory", "link": "https://www.amazon.in/s?k=Nick+and+Tesla"},
+      {"title": "Whoosh! Lonnie Johnson's Super Soaker", "link": "https://www.amazon.in/s?k=Whoosh+Lonnie+Johnson"},
+      {"title": "The Inventor's Secret", "link": "https://www.amazon.in/s?k=The+Inventors+Secret"}
+    ],
+    "Advanced": [
+      {"title": "The Innovators", "link": "https://www.amazon.in/s?k=The+Innovators+Walter+Isaacson"},
+      {"title": "The Soul of a New Machine", "link": "https://www.amazon.in/s?k=Soul+of+a+New+Machine"},
+      {"title": "Life 3.0", "link": "https://www.amazon.in/s?k=Life+3.0+Max+Tegmark"},
+      {"title": "Digital Minimalism", "link": "https://www.amazon.in/s?k=Digital+Minimalism+Cal+Newport"},
+      {"title": "The Age of AI", "link": "https://www.amazon.in/s?k=The+Age+of+AI+Kissinger"}
+    ]
+  },
+  "Art": {
+    "Novice": [
+      {"title": "The Dot", "link": "https://www.amazon.in/s?k=The+Dot+Peter+Reynolds"},
+      {"title": "Katie and the Starry Night", "link": "https://www.amazon.in/s?k=Katie+and+Starry+Night"},
+      {"title": "Iggy Peck, Architect", "link": "https://www.amazon.in/s?k=Iggy+Peck+Architect"},
+      {"title": "Beautiful Oops!", "link": "https://www.amazon.in/s?k=Beautiful+Oops"},
+      {"title": "Mix It Up!", "link": "https://www.amazon.in/s?k=Mix+It+Up+Herve+Tullet"}
+    ],
+    "Intermediate": [
+      {"title": "Vincent and Theo", "link": "https://www.amazon.in/s?k=Vincent+and+Theo+Deborah+Heiligman"},
+      {"title": "The Art Book for Children", "link": "https://www.amazon.in/s?k=The+Art+Book+for+Children"},
+      {"title": "Drawing from Memory", "link": "https://www.amazon.in/s?k=Drawing+from+Memory+Allen+Say"},
+      {"title": "Seen and Unseen", "link": "https://www.amazon.in/s?k=Seen+and+Unseen+Book"},
+      {"title": "Masterpiece", "link": "https://www.amazon.in/s?k=Masterpiece+Elise+Broach"}
+    ],
+    "Advanced": [
+      {"title": "Lust for Life", "link": "https://www.amazon.in/s?k=Lust+for+Life+Irving+Stone"},
+      {"title": "The Story of Art", "link": "https://www.amazon.in/s?k=The+Story+of+Art+Gombrich"},
+      {"title": "Girl with a Pearl Earring", "link": "https://www.amazon.in/s?k=Girl+with+Pearl+Earring"},
+      {"title": "Broad Strokes", "link": "https://www.amazon.in/s?k=Broad+Strokes+Art+History"},
+      {"title": "Leonardo da Vinci", "link": "https://www.amazon.in/s?k=Leonardo+da+Vinci+Isaacson"}
+    ]
+  },
+  "Geography": {
+    "Novice": [
+      {"title": "Me on the Map", "link": "https://www.amazon.in/s?k=Me+on+the+Map"},
+      {"title": "Maps", "link": "https://www.amazon.in/s?k=Maps+Mizielinska"},
+      {"title": "National Geographic Little Kids First Big Book of the World", "link": "https://www.amazon.in/s?k=Little+Kids+First+Big+Book+World"},
+      {"title": "Follow That Map!", "link": "https://www.amazon.in/s?k=Follow+That+Map"},
+      {"title": "This is the World", "link": "https://www.amazon.in/s?k=This+is+the+World+Sasek"}
+    ],
+    "Intermediate": [
+      {"title": "Prisoners of Geography (Young Readers)", "link": "https://www.amazon.in/s?k=Prisoners+of+Geography+Young+Readers"},
+      {"title": "Where in the World?", "link": "https://www.amazon.in/s?k=Where+in+the+World+Trivia"},
+      {"title": "The Atlas of Adventure", "link": "https://www.amazon.in/s?k=Atlas+of+Adventure"},
+      {"title": "Scrambled States of America", "link": "https://www.amazon.in/s?k=Scrambled+States+of+America"},
+      {"title": "National Geographic Student Atlas", "link": "https://www.amazon.in/s?k=National+Geographic+Student+Atlas"}
+    ],
+    "Advanced": [
+      {"title": "Prisoners of Geography", "link": "https://www.amazon.in/s?k=Prisoners+of+Geography+Tim+Marshall"},
+      {"title": "The Revenge of Geography", "link": "https://www.amazon.in/s?k=Revenge+of+Geography+Kaplan"},
+      {"title": "Factfulness", "link": "https://www.amazon.in/s?k=Factfulness+Hans+Rosling"},
+      {"title": "Atlas Shrugged", "link": "https://www.amazon.in/s?k=Atlas+Shrugged"},
+      {"title": "The Power of Geography", "link": "https://www.amazon.in/s?k=The+Power+of+Geography"}
+    ]
+  },
+  "Mythology": {
+    "Novice": [
+      {"title": "D'Aulaires' Book of Greek Myths", "link": "https://www.amazon.in/s?k=DAulaires+Book+of+Greek+Myths"},
+      {"title": "The Orchard Book of First Greek Myths", "link": "https://www.amazon.in/s?k=Orchard+Book+First+Greek+Myths"},
+      {"title": "Mitos de Grecia", "link": "https://www.amazon.in/s?k=Greek+Myths+for+Kids"},
+      {"title": "Classic Myths to Read Aloud", "link": "https://www.amazon.in/s?k=Classic+Myths+to+Read+Aloud"},
+      {"title": "The McElderry Book of Greek Myths", "link": "https://www.amazon.in/s?k=McElderry+Book+Greek+Myths"}
+    ],
+    "Intermediate": [
+      {"title": "Percy Jackson: The Greek Gods", "link": "https://www.amazon.in/s?k=Percy+Jackson+Greek+Gods"},
+      {"title": "Aru Shah and the End of Time", "link": "https://www.amazon.in/s?k=Aru+Shah+End+of+Time"},
+      {"title": "Magnus Chase and the Gods of Asgard", "link": "https://www.amazon.in/s?k=Magnus+Chase"},
+      {"title": "The Serpent's Shadow", "link": "https://www.amazon.in/s?k=The+Serpents+Shadow"},
+      {"title": "Treasury of Egyptian Mythology", "link": "https://www.amazon.in/s?k=National+Geographic+Egyptian+Mythology"}
+    ],
+    "Advanced": [
+      {"title": "Mythos", "link": "https://www.amazon.in/s?k=Mythos+Stephen+Fry"},
+      {"title": "Circe", "link": "https://www.amazon.in/s?k=Circe+Madeline+Miller"},
+      {"title": "Norse Mythology", "link": "https://www.amazon.in/s?k=Norse+Mythology+Neil+Gaiman"},
+      {"title": "The Song of Achilles", "link": "https://www.amazon.in/s?k=The+Song+of+Achilles"},
+      {"title": "The Odyssey (Fagles Translation)", "link": "https://www.amazon.in/s?k=The+Odyssey+Fagles"}
+    ]
+  },
+  "Poetry": {
+    "Novice": [
+      {"title": "Where the Sidewalk Ends", "link": "https://www.amazon.in/s?k=Where+the+Sidewalk+Ends"},
+      {"title": "A Light in the Attic", "link": "https://www.amazon.in/s?k=A+Light+in+the+Attic"},
+      {"title": "Hailstones and Halibut Bones", "link": "https://www.amazon.in/s?k=Hailstones+and+Halibut+Bones"},
+      {"title": "Hi, Koo!", "link": "https://www.amazon.in/s?k=Hi+Koo+Jon+Muth"},
+      {"title": "Poems to Learn by Heart", "link": "https://www.amazon.in/s?k=Poems+to+Learn+by+Heart"}
+    ],
+    "Intermediate": [
+      {"title": "Brown Girl Dreaming", "link": "https://www.amazon.in/s?k=Brown+Girl+Dreaming"},
+      {"title": "Love That Dog", "link": "https://www.amazon.in/s?k=Love+That+Dog"},
+      {"title": "The Crossover", "link": "https://www.amazon.in/s?k=The+Crossover+Kwame+Alexander"},
+      {"title": "Out of the Dust", "link": "https://www.amazon.in/s?k=Out+of+the+Dust"},
+      {"title": "Inside Out & Back Again", "link": "https://www.amazon.in/s?k=Inside+Out+and+Back+Again"}
+    ],
+    "Advanced": [
+      {"title": "The Wasteland", "link": "https://www.amazon.in/s?k=The+Wasteland+TS+Eliot"},
+      {"title": "Leaves of Grass", "link": "https://www.amazon.in/s?k=Leaves+of+Grass+Whitman"},
+      {"title": "The Sun and Her Flowers", "link": "https://www.amazon.in/s?k=The+Sun+and+Her+Flowers"},
+      {"title": "Selected Poems of Emily Dickinson", "link": "https://www.amazon.in/s?k=Emily+Dickinson+Poems"},
+      {"title": "The Hill We Climb", "link": "https://www.amazon.in/s?k=The+Hill+We+Climb+Amanda+Gorman"}
+    ]
+  },
+  "Romance": {
+    "Novice": [
+      {"title": "Frog in Love", "link": "https://www.amazon.in/s?k=Frog+in+Love+Max+Velthuijs"},
+      {"title": "Guess How Much I Love You", "link": "https://www.amazon.in/s?k=Guess+How+Much+I+Love+You"},
+      {"title": "Somebody Loves You, Mr. Hatch", "link": "https://www.amazon.in/s?k=Somebody+Loves+You+Mr+Hatch"},
+      {"title": "Love Monster", "link": "https://www.amazon.in/s?k=Love+Monster+Rachel+Bright"},
+      {"title": "The Day It Rained Hearts", "link": "https://www.amazon.in/s?k=The+Day+It+Rained+Hearts"}
+    ],
+    "Intermediate": [
+      {"title": "The Selection", "link": "https://www.amazon.in/s?k=The+Selection+Kiera+Cass"},
+      {"title": "To All the Boys I've Loved Before", "link": "https://www.amazon.in/s?k=To+All+the+Boys+Loved+Before"},
+      {"title": "Eleanor & Park", "link": "https://www.amazon.in/s?k=Eleanor+and+Park"},
+      {"title": "Stargirl", "link": "https://www.amazon.in/s?k=Stargirl+Jerry+Spinelli"},
+      {"title": "Better Than the Movies", "link": "https://www.amazon.in/s?k=Better+Than+the+Movies"}
+    ],
+    "Advanced": [
+      {"title": "Pride and Prejudice", "link": "https://www.amazon.in/s?k=Pride+and+Prejudice"},
+      {"title": "Jane Eyre", "link": "https://www.amazon.in/s?k=Jane+Eyre"},
+      {"title": "The Fault in Our Stars", "link": "https://www.amazon.in/s?k=The+Fault+in+Our+Stars"},
+      {"title": "Outlander", "link": "https://www.amazon.in/s?k=Outlander+Diana+Gabaldon"},
+      {"title": "The Song of Achilles", "link": "https://www.amazon.in/s?k=Song+of+Achilles"}
+    ]
+  }
+}
