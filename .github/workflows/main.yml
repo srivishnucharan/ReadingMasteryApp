@@ -9,14 +9,15 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Build with Buildozer
-        # Corrected name: ArtemSBulgakov
+        # Corrected name and removed invalid python_version input
         uses: ArtemSBulgakov/buildozer-action@v1
         with:
           buildozer_version: master
-          python_version: 3.11
+          # Optional: Specify working directory if buildozer.spec is not in root
+          workdir: . 
 
       - name: Upload APK
-        # Corrected to v4 to fix the deprecation error
+        # Updated to v4 to fix the deprecation error
         uses: actions/upload-artifact@v4
         with:
           name: ReadingMasteryApp-APK
