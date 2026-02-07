@@ -578,8 +578,7 @@ class ReadingMasteryApp(MDApp):
         return Builder.load_string(KV)
 
     def open_local_pdf(self, filename):
-        # This replaces the hardcoded C:\Users\... path
-        # It finds the 'assets' folder relative to where the app is installed
+        # Use os.path.dirname(__file__) to find the folder regardless of OS
         base_path = os.path.dirname(__file__)
         assets_path = os.path.join(base_path, "assets")
         
@@ -733,4 +732,5 @@ MDCard:
 if __name__ == '__main__':
 
     ReadingMasteryApp().run()
+
 
