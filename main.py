@@ -580,7 +580,7 @@ class ReadingMasteryApp(MDApp):
     def open_local_pdf(self, filename):
         # Use os.path.dirname(__file__) to find the folder regardless of OS
         base_path = os.path.dirname(__file__)
-        assets_path = os.path.join(base_path, "assets")
+        assets_path = os.path.join(os.path.dirname(__file__), "assets")
         
         filepath = os.path.join(assets_path, filename)
         if os.path.exists(filepath):
@@ -732,5 +732,6 @@ MDCard:
 if __name__ == '__main__':
 
     ReadingMasteryApp().run()
+
 
 
