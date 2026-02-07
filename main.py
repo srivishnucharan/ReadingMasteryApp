@@ -1,7 +1,7 @@
-import webbrowser
 import time
 import json
 import os
+from kivy.utils import platform
 from kivymd.app import MDApp
 from kivy.lang import Builder
 from kivy.uix.screenmanager import Screen, ScreenManager
@@ -14,6 +14,24 @@ from kivymd.uix.label import MDLabel
 from kivy.clock import Clock 
 from kivy.uix.boxlayout import BoxLayout
 import backend 
+
+# --- ANDROID-COMPATIBLE URL OPENER ---
+def open_url(url):
+    """Open URL - works on both Android and desktop"""
+    if platform == 'android':
+        from jnius import autoclass, cast
+        PythonActivity = autoclass('org.kivy.android.PythonActivity')
+        Intent = autoclass('android.content.Intent')
+        Uri = autoclass('android.net.Uri')
+        
+        intent = Intent()
+        intent.setAction(Intent.ACTION_VIEW)
+        intent.setData(Uri.parse(url))
+        currentActivity = cast('android.app.Activity', PythonActivity.mActivity)
+        currentActivity.startActivity(intent)
+    else:
+        import webbrowser
+        webbrowser.open(url)
 
 # --- CUSTOM WIDGETS ---
 
@@ -225,341 +243,514 @@ ScreenManager:
         orientation: 'vertical'
         padding: "40dp"
         spacing: "20dp"
-        MDBoxLayout:
-            orientation: 'vertical'
-            adaptive_height: True
+        MDIcon:
+            icon: "book-open-page-variant"
+            font_size: "80sp"
+            halign: "center"
             pos_hint: {"center_x": .5}
-            spacing: "12dp"
-            MDGridLayout:
-                cols: 2
-                adaptive_size: True
-                pos_hint: {"center_x": .5}
-                spacing: "20dp"
-                MDIcon:
-                    icon: "book-open-page-variant"
-                    font_size: "96sp"
-                    theme_text_color: "Custom"
-                    text_color: 0.15, 0.18, 0.45, 1
-                    size_hint: None, None
-                    size: "96dp", "96dp"
-                    pos_hint: {"center_y": .5}
-                MDBoxLayout:
-                    orientation: 'vertical'
-                    adaptive_size: True
-                    pos_hint: {"center_y": .5}
-                    spacing: "-8dp"
-                    MDLabel:
-                        text: "READING"
-                        font_style: "H4"
-                        bold: True
-                        theme_text_color: "Custom"
-                        text_color: 0.15, 0.18, 0.45, 1
-                        adaptive_size: True
-                    MDLabel:
-                        text: "MASTERY"
-                        font_style: "H4"
-                        bold: True
-                        theme_text_color: "Custom"
-                        text_color: 0.15, 0.18, 0.45, 1
-                        adaptive_size: True
-            MDLabel:
-                text: "Your Personal Reading Coach"
-                halign: "center"
-                font_style: "Subtitle2"
-                theme_text_color: "Custom"
-                text_color: 0.85, 0.65, 0.13, 1 
-                adaptive_height: True
-                bold: True
+            theme_text_color: "Custom"
+            text_color: 0.15, 0.18, 0.45, 1
+        MDLabel:
+            text: "READING MASTERY"
+            font_style: "H3"
+            halign: "center"
+            bold: True
+            theme_text_color: "Custom"
+            text_color: 0.15, 0.18, 0.45, 1
+        MDLabel:
+            text: "Your Personal Reading Coach"
+            halign: "center"
+            theme_text_color: "Secondary"
         Widget:
             size_hint_y: None
-            height: "40dp"
+            height: "20dp"
         MDTextField:
             id: user_name
-            hint_text: "Enter your name"
+            hint_text: "Enter your full name"
+            icon_left: "account"
             mode: "rectangle"
-            size_hint_x: 0.85
+            size_hint_x: .8
             pos_hint: {"center_x": .5}
-            line_color_focus: 0.15, 0.18, 0.45, 1
         MDRaisedButton:
-            text: "LOG IN"
-            size_hint_x: 0.85
+            text: "GET STARTED"
+            size_hint: None, None
+            size: "200dp", "50dp"
             pos_hint: {"center_x": .5}
-            on_release: root.process_login()
             md_bg_color: 0.15, 0.18, 0.45, 1
+            on_release: root.process_login()
         Widget:
 
 <WelcomeScreen>:
     name: 'welcome'
+    NavigationToolbar:
+        id: toolbar
+        pos_hint: {"top": 1}
     MDBoxLayout:
         orientation: 'vertical'
-        NavigationToolbar:
-            left_action_items: []
-        MDBoxLayout:
-            orientation: 'vertical'
-            padding: "40dp"
-            spacing: "20dp"
-            MDLabel:
-                text: "Welcome back, " + app.first_name + "!"
-                font_style: "H4"
+        padding: "30dp"
+        spacing: "30dp"
+        pos_hint: {"top": .85}
+        MDLabel:
+            text: "Welcome, " + app.first_name + "!"
+            font_style: "H4"
+            halign: "center"
+            bold: True
+            theme_text_color: "Custom"
+            text_color: 0.15, 0.18, 0.45, 1
+        MDLabel:
+            text: "Choose a category to get started"
+            halign: "center"
+            theme_text_color: "Secondary"
+        Widget:
+            size_hint_y: None
+            height: "20dp"
+        MDCard:
+            orientation: "vertical"
+            size_hint: None, None
+            size: "300dp", "120dp"
+            pos_hint: {"center_x": .5}
+            padding: "20dp"
+            spacing: "10dp"
+            radius: 20
+            elevation: 3
+            md_bg_color: 1, 1, 1, 1
+            ripple_behavior: True
+            on_release: root.manager.current = 'age_selection'
+            MDIcon:
+                icon: "book-multiple"
+                font_size: "48sp"
                 halign: "center"
                 theme_text_color: "Custom"
                 text_color: 0.15, 0.18, 0.45, 1
-            MDBoxLayout:
-                orientation: 'horizontal'
-                spacing: "15dp"
-                size_hint_y: None
-                height: "60dp"
-                MDRaisedButton:
-                    text: "CONTINUE JOURNEY"
-                    size_hint_x: 0.5
-                    md_bg_color: 0.15, 0.18, 0.45, 1
-                    on_release: root.manager.current = 'age_selection'
-                MDRaisedButton:
-                    text: "CHILDREN'S BOOKS"
-                    size_hint_x: 0.5
-                    md_bg_color: 0.85, 0.65, 0.13, 1
-                    on_release: root.manager.current = 'children_books'
-            Widget:
+            MDLabel:
+                text: "Reading Practice"
+                halign: "center"
+                bold: True
+                font_style: "H6"
+                theme_text_color: "Custom"
+                text_color: 0.15, 0.18, 0.45, 1
+        MDCard:
+            orientation: "vertical"
+            size_hint: None, None
+            size: "300dp", "120dp"
+            pos_hint: {"center_x": .5}
+            padding: "20dp"
+            spacing: "10dp"
+            radius: 20
+            elevation: 3
+            md_bg_color: 1, 1, 1, 1
+            ripple_behavior: True
+            on_release: root.manager.current = 'children_books'
+            MDIcon:
+                icon: "human-child"
+                font_size: "48sp"
+                halign: "center"
+                theme_text_color: "Custom"
+                text_color: 0.85, 0.65, 0.13, 1
+            MDLabel:
+                text: "Children's Books"
+                halign: "center"
+                bold: True
+                font_style: "H6"
+                theme_text_color: "Custom"
+                text_color: 0.85, 0.65, 0.13, 1
+        Widget:
 
 <ChildrenBooksScreen>:
     name: 'children_books'
+    NavigationToolbar:
+        id: toolbar
+        pos_hint: {"top": 1}
     MDBoxLayout:
         orientation: 'vertical'
-        NavigationToolbar:
-            title: "Children's Library"
+        padding: "30dp"
+        spacing: "20dp"
+        pos_hint: {"top": .85}
+        MDLabel:
+            text: "Children's Book Recommendations"
+            font_style: "H5"
+            halign: "center"
+            bold: True
+            theme_text_color: "Custom"
+            text_color: 0.15, 0.18, 0.45, 1
         ScrollView:
             MDList:
-                OneLineIconListItem:
-                    text: "Hide & Seek (Click to Open)"
-                    on_release: app.open_local_pdf("001-HIDE-AND-SEEK.pdf")
-                    IconLeftWidget:
-                        icon: "file-pdf-box"
-                        theme_text_color: "Custom"
-                        text_color: 0.85, 0.65, 0.13, 1
-                OneLineIconListItem:
-                    text: "Sunny Medows Woodland School (Click to Open)"
-                    on_release: app.open_local_pdf("002-SUNNY-MEADOWS-WOODLAND-SCHOOL.pdf")
-                    IconLeftWidget:
-                        icon: "file-pdf-box"
-                        theme_text_color: "Custom"
-                        text_color: 0.85, 0.65, 0.13, 1
-                OneLineIconListItem:
-                    text: "Hammy the Hamster (Click to Open)"
-                    on_release: app.open_local_pdf("003-HAMMY-THE-HAMSTER.pdf")
-                    IconLeftWidget:
-                        icon: "file-pdf-box"
-                        theme_text_color: "Custom"
-                        text_color: 0.85, 0.65, 0.13, 1       
-                OneLineIconListItem:
-                    text: "The Class of the Missing Smile (Click to Open)"
-                    on_release: app.open_local_pdf("004-THE-CASE-OF-THE-MISSING-SMILE.pdf")
-                    IconLeftWidget:
-                        icon: "file-pdf-box"
-                        theme_text_color: "Custom"
-                        text_color: 0.85, 0.65, 0.13, 1       
-                OneLineIconListItem:
-                    text: "Captain Fantastic (Click to Open)"
-                    on_release: app.open_local_pdf("005-CAPTAIN-FANTASTIC.pdf")
-                    IconLeftWidget:
-                        icon: "file-pdf-box"
-                        theme_text_color: "Custom"
-                        text_color: 0.85, 0.65, 0.13, 1                  
+                TwoLineAvatarIconListItem:
+                    text: "The Very Hungry Caterpillar"
+                    secondary_text: "Buy on Amazon.in"
+                    on_release: app.open_local_pdf("sample.pdf")
+                TwoLineAvatarIconListItem:
+                    text: "Where the Wild Things Are"
+                    secondary_text: "Buy on Amazon.in"
+                    on_release: app.open_local_pdf("sample.pdf")
+                TwoLineAvatarIconListItem:
+                    text: "Goodnight Moon"
+                    secondary_text: "Buy on Amazon.in"
+                    on_release: app.open_local_pdf("sample.pdf")
 
 <AgeSelectionScreen>:
     name: 'age_selection'
+    NavigationToolbar:
+        id: toolbar
+        pos_hint: {"top": 1}
     MDBoxLayout:
         orientation: 'vertical'
-        NavigationToolbar:
-        MDBoxLayout:
-            orientation: 'vertical'
-            padding: "20dp"
+        padding: "30dp"
+        spacing: "20dp"
+        pos_hint: {"top": .85}
+        MDLabel:
+            text: "Select Your Age Group"
+            font_style: "H5"
+            halign: "center"
+            bold: True
+            theme_text_color: "Custom"
+            text_color: 0.15, 0.18, 0.45, 1
+        Widget:
+            size_hint_y: None
+            height: "20dp"
+        GridLayout:
+            cols: 2
             spacing: "15dp"
-            MDLabel:
-                text: "Step 1: Choose Age Group"
-                halign: "center"
-                font_style: "H6"
-                theme_text_color: "Custom"
-                text_color: 0.15, 0.18, 0.45, 1
-            MDRaisedButton:
-                text: "8-10 Years"
-                size_hint_x: 0.8
-                pos_hint: {"center_x": .5}
-                md_bg_color: 0.15, 0.18, 0.45, 1
+            size_hint_y: None
+            height: self.minimum_height
+            MDCard:
+                orientation: "vertical"
+                size_hint: None, None
+                size: "140dp", "100dp"
+                padding: "15dp"
+                radius: 15
+                elevation: 2
+                ripple_behavior: True
+                on_release: app.set_age("5-7")
+                MDLabel:
+                    text: "5-7"
+                    halign: "center"
+                    font_style: "H4"
+                    bold: True
+                    theme_text_color: "Custom"
+                    text_color: 0.15, 0.18, 0.45, 1
+                MDLabel:
+                    text: "years"
+                    halign: "center"
+                    theme_text_color: "Secondary"
+            MDCard:
+                orientation: "vertical"
+                size_hint: None, None
+                size: "140dp", "100dp"
+                padding: "15dp"
+                radius: 15
+                elevation: 2
+                ripple_behavior: True
                 on_release: app.set_age("8-10")
-            MDRaisedButton:
-                text: "11-14 Years"
-                size_hint_x: 0.8
-                pos_hint: {"center_x": .5}
-                md_bg_color: 0.15, 0.18, 0.45, 1
-                on_release: app.set_age("11-14")
-            MDRaisedButton:
-                text: "15-21 Years"
-                size_hint_x: 0.8
-                pos_hint: {"center_x": .5}
-                md_bg_color: 0.15, 0.18, 0.45, 1
-                on_release: app.set_age("15-21")
-            MDRaisedButton:
-                text: "Above 21"
-                size_hint_x: 0.8
-                pos_hint: {"center_x": .5}
-                md_bg_color: 0.15, 0.18, 0.45, 1
-                on_release: app.set_age("Above 21")
+                MDLabel:
+                    text: "8-10"
+                    halign: "center"
+                    font_style: "H4"
+                    bold: True
+                    theme_text_color: "Custom"
+                    text_color: 0.15, 0.18, 0.45, 1
+                MDLabel:
+                    text: "years"
+                    halign: "center"
+                    theme_text_color: "Secondary"
+            MDCard:
+                orientation: "vertical"
+                size_hint: None, None
+                size: "140dp", "100dp"
+                padding: "15dp"
+                radius: 15
+                elevation: 2
+                ripple_behavior: True
+                on_release: app.set_age("11-13")
+                MDLabel:
+                    text: "11-13"
+                    halign: "center"
+                    font_style: "H4"
+                    bold: True
+                    theme_text_color: "Custom"
+                    text_color: 0.15, 0.18, 0.45, 1
+                MDLabel:
+                    text: "years"
+                    halign: "center"
+                    theme_text_color: "Secondary"
+            MDCard:
+                orientation: "vertical"
+                size_hint: None, None
+                size: "140dp", "100dp"
+                padding: "15dp"
+                radius: 15
+                elevation: 2
+                ripple_behavior: True
+                on_release: app.set_age("14+")
+                MDLabel:
+                    text: "14+"
+                    halign: "center"
+                    font_style: "H4"
+                    bold: True
+                    theme_text_color: "Custom"
+                    text_color: 0.15, 0.18, 0.45, 1
+                MDLabel:
+                    text: "years"
+                    halign: "center"
+                    theme_text_color: "Secondary"
+        Widget:
 
 <LevelSelectionScreen>:
     name: 'level_selection'
+    NavigationToolbar:
+        id: toolbar
+        pos_hint: {"top": 1}
     MDBoxLayout:
         orientation: 'vertical'
-        NavigationToolbar:
-        MDBoxLayout:
-            orientation: 'vertical'
-            padding: "20dp"
+        padding: "30dp"
+        spacing: "20dp"
+        pos_hint: {"top": .85}
+        MDLabel:
+            text: "Choose Your Reading Level"
+            font_style: "H5"
+            halign: "center"
+            bold: True
+            theme_text_color: "Custom"
+            text_color: 0.15, 0.18, 0.45, 1
+        Widget:
+            size_hint_y: None
+            height: "20dp"
+        GridLayout:
+            cols: 2
             spacing: "15dp"
-            MDLabel:
-                text: "Step 2: Choose Proficiency"
-                halign: "center"
-                font_style: "H6"
-                theme_text_color: "Custom"
-                text_color: 0.15, 0.18, 0.45, 1
-            MDRaisedButton:
-                text: "Novice"
-                size_hint_x: 0.8
-                pos_hint: {"center_x": .5}
-                md_bg_color: 0.15, 0.18, 0.45, 1
-                on_release: app.set_level("Novice")
-            MDRaisedButton:
-                text: "Intermediate"
-                size_hint_x: 0.8
-                pos_hint: {"center_x": .5}
-                md_bg_color: 0.15, 0.18, 0.45, 1
+            size_hint_y: None
+            height: self.minimum_height
+            MDCard:
+                orientation: "vertical"
+                size_hint: None, None
+                size: "140dp", "100dp"
+                padding: "15dp"
+                radius: 15
+                elevation: 2
+                ripple_behavior: True
+                on_release: app.set_level("Beginner")
+                MDIcon:
+                    icon: "star-outline"
+                    halign: "center"
+                    theme_text_color: "Custom"
+                    text_color: 0.15, 0.18, 0.45, 1
+                MDLabel:
+                    text: "Beginner"
+                    halign: "center"
+                    bold: True
+                    theme_text_color: "Custom"
+                    text_color: 0.15, 0.18, 0.45, 1
+            MDCard:
+                orientation: "vertical"
+                size_hint: None, None
+                size: "140dp", "100dp"
+                padding: "15dp"
+                radius: 15
+                elevation: 2
+                ripple_behavior: True
                 on_release: app.set_level("Intermediate")
-            MDRaisedButton:
-                text: "Advanced"
-                size_hint_x: 0.8
-                pos_hint: {"center_x": .5}
-                md_bg_color: 0.15, 0.18, 0.45, 1
+                MDIcon:
+                    icon: "star-half-full"
+                    halign: "center"
+                    theme_text_color: "Custom"
+                    text_color: 0.15, 0.18, 0.45, 1
+                MDLabel:
+                    text: "Intermediate"
+                    halign: "center"
+                    bold: True
+                    theme_text_color: "Custom"
+                    text_color: 0.15, 0.18, 0.45, 1
+            MDCard:
+                orientation: "vertical"
+                size_hint: None, None
+                size: "140dp", "100dp"
+                padding: "15dp"
+                radius: 15
+                elevation: 2
+                ripple_behavior: True
                 on_release: app.set_level("Advanced")
+                MDIcon:
+                    icon: "star"
+                    halign: "center"
+                    theme_text_color: "Custom"
+                    text_color: 0.15, 0.18, 0.45, 1
+                MDLabel:
+                    text: "Advanced"
+                    halign: "center"
+                    bold: True
+                    theme_text_color: "Custom"
+                    text_color: 0.15, 0.18, 0.45, 1
+            MDCard:
+                orientation: "vertical"
+                size_hint: None, None
+                size: "140dp", "100dp"
+                padding: "15dp"
+                radius: 15
+                elevation: 2
+                ripple_behavior: True
+                on_release: app.set_level("Expert")
+                MDIcon:
+                    icon: "star-four-points"
+                    halign: "center"
+                    theme_text_color: "Custom"
+                    text_color: 0.15, 0.18, 0.45, 1
+                MDLabel:
+                    text: "Expert"
+                    halign: "center"
+                    bold: True
+                    theme_text_color: "Custom"
+                    text_color: 0.15, 0.18, 0.45, 1
+        Widget:
 
 <GenreSelection>:
     name: 'genre_selection'
+    NavigationToolbar:
+        id: toolbar
+        pos_hint: {"top": 1}
     MDBoxLayout:
         orientation: 'vertical'
-        NavigationToolbar:
+        padding: "30dp"
+        spacing: "20dp"
+        pos_hint: {"top": .85}
+        MDLabel:
+            text: "Pick Your Genre"
+            font_style: "H5"
+            halign: "center"
+            bold: True
+            theme_text_color: "Custom"
+            text_color: 0.15, 0.18, 0.45, 1
         ScrollView:
-            MDGridLayout:
+            GridLayout:
                 id: genre_grid
-                cols: 2
-                padding: "20dp"
-                spacing: "20dp"
-                adaptive_height: True
+                cols: 1
+                spacing: "10dp"
+                size_hint_y: None
+                height: self.minimum_height
+                padding: "10dp"
 
 <BookListScreen>:
     name: 'book_list'
+    NavigationToolbar:
+        id: toolbar
+        pos_hint: {"top": 1}
     MDBoxLayout:
         orientation: 'vertical'
-        NavigationToolbar:
-            title: root.category_title
+        padding: "20dp"
+        spacing: "15dp"
+        pos_hint: {"top": .85}
+        MDLabel:
+            text: root.category_title
+            font_style: "H6"
+            halign: "center"
+            bold: True
+            theme_text_color: "Custom"
+            text_color: 0.15, 0.18, 0.45, 1
+        MDLabel:
+            text: "Read all books and check them off when finished"
+            halign: "center"
+            theme_text_color: "Secondary"
+            font_style: "Caption"
         ScrollView:
             MDList:
                 id: book_list
-        MDBoxLayout:
-            size_hint_y: None
-            height: "80dp"
-            padding: "10dp"
-            MDRaisedButton:
-                id: submit_btn
-                text: "COMPLETE LEVEL"
-                pos_hint: {"center_x": .5}
-                disabled: True
-                md_bg_color: 0.85, 0.65, 0.13, 1
-                on_release: app.graduation_popup()
+        MDRaisedButton:
+            id: submit_btn
+            text: "SUBMIT & EARN CERTIFICATE"
+            size_hint: None, None
+            size: "280dp", "50dp"
+            pos_hint: {"center_x": .5}
+            md_bg_color: 0.15, 0.18, 0.45, 1
+            disabled: True
+            on_release: app.graduation_popup()
 
 <Dashboard>:
     name: 'dashboard'
+    NavigationToolbar:
+        id: toolbar
+        pos_hint: {"top": 1}
     MDBoxLayout:
-        orientation: 'vertical'
-        NavigationToolbar:
+        orientation: 'horizontal'
+        pos_hint: {"top": .85}
         MDBoxLayout:
-            orientation: 'horizontal'
-            MDCard:
-                size_hint_x: 0.4
-                elevation: 2
-                MDBoxLayout:
-                    orientation: 'vertical'
-                    MDLabel:
-                        text: "PROGRESS"
-                        halign: "center"
-                        size_hint_y: None
-                        height: "40dp"
-                        bold: True
-                        theme_text_color: "Custom"
-                        text_color: 0.15, 0.18, 0.45, 1
-                    MDList:
-                        OneLineIconListItem:
-                            text: "Speed Test"
-                            on_release: root.show_content("test")
-                            IconLeftWidget:
-                                icon: "timer"
-                                theme_text_color: "Custom"
-                                text_color: 0.85, 0.65, 0.13, 1
-                        OneLineIconListItem:
-                            text: "Points"
-                            on_release: root.show_content("points")
-                            IconLeftWidget:
-                                icon: "numeric"
-                                theme_text_color: "Custom"
-                                text_color: 0.85, 0.65, 0.13, 1
-                    MDSeparator:
-                    MDLabel:
-                        text: "MY BADGES"
-                        halign: "center"
-                        size_hint_y: None
-                        height: "40dp"
-                        bold: True
-                    ScrollView:
-                        MDList:
-                            id: badge_list
-                            OneLineIconListItem:
-                                text: "Novice Shield"
-                                IconLeftWidget:
-                                    icon: "shield-star"
-                                    theme_text_color: "Custom"
-                                    text_color: 0.85, 0.65, 0.13, 1
-                            OneLineIconListItem:
-                                text: "Master Reader"
-                                IconLeftWidget:
-                                    icon: "trophy-variant"
-                                    theme_text_color: "Custom"
-                                    text_color: 0.85, 0.65, 0.13, 1
-                    MDSeparator:
-                    MDLabel:
-                        text: "CERTIFICATES"
-                        halign: "center"
-                        size_hint_y: None
-                        height: "40dp"
-                        bold: True
-                    ScrollView:
-                        MDList:
-                            id: cert_gallery
+            orientation: 'vertical'
+            size_hint_x: .3
+            padding: "10dp"
+            spacing: "10dp"
+            md_bg_color: 1, 1, 1, 1
+            MDLabel:
+                text: "MODULES"
+                halign: "center"
+                size_hint_y: None
+                height: "40dp"
+                bold: True
+            ScrollView:
+                MDList:
+                    OneLineIconListItem:
+                        text: "Speed Test"
+                        on_release: root.show_content("test")
+                        IconLeftWidget:
+                            icon: "timer-sand"
+                            theme_text_color: "Custom"
+                            text_color: 0.15, 0.18, 0.45, 1
+                    OneLineIconListItem:
+                        text: "My Points"
+                        on_release: root.show_content("points")
+                        IconLeftWidget:
+                            icon: "medal"
+                            theme_text_color: "Custom"
+                            text_color: 0.15, 0.18, 0.45, 1
+            MDSeparator:
+            MDLabel:
+                text: "MY BADGES"
+                halign: "center"
+                size_hint_y: None
+                height: "40dp"
+                bold: True
+            ScrollView:
+                MDList:
+                    id: badge_list
+                    OneLineIconListItem:
+                        text: "Novice Shield"
+                        IconLeftWidget:
+                            icon: "shield-star"
+                            theme_text_color: "Custom"
+                            text_color: 0.85, 0.65, 0.13, 1
+                    OneLineIconListItem:
+                        text: "Master Reader"
+                        IconLeftWidget:
+                            icon: "trophy-variant"
+                            theme_text_color: "Custom"
+                            text_color: 0.85, 0.65, 0.13, 1
+            MDSeparator:
+            MDLabel:
+                text: "CERTIFICATES"
+                halign: "center"
+                size_hint_y: None
+                height: "40dp"
+                bold: True
+            ScrollView:
+                MDList:
+                    id: cert_gallery
+        MDBoxLayout:
+            id: content_pane
+            orientation: 'vertical'
+            padding: "20dp"
+            spacing: "10dp"
             MDBoxLayout:
-                id: content_pane
                 orientation: 'vertical'
-                padding: "20dp"
-                spacing: "10dp"
-                MDBoxLayout:
-                    orientation: 'vertical'
-                    size_hint_y: None
-                    height: "60dp"
-                    MDLabel:
-                        text: "Overall Reading Progress"
-                        theme_text_color: "Secondary"
-                        font_style: "Caption"
-                    MDProgressBar:
-                        value: (root.points / 500) * 100 if root.points <= 500 else 100
-                        color: 0.85, 0.65, 0.13, 1
+                size_hint_y: None
+                height: "60dp"
                 MDLabel:
-                    text: "Select a module to view progress"
-                    halign: "center"
+                    text: "Overall Reading Progress"
                     theme_text_color: "Secondary"
+                    font_style: "Caption"
+                MDProgressBar:
+                    value: (root.points / 500) * 100 if root.points <= 500 else 100
+                    color: 0.85, 0.65, 0.13, 1
+            MDLabel:
+                text: "Select a module to view progress"
+                halign: "center"
+                theme_text_color: "Secondary"
 '''
 
 class ReadingMasteryApp(MDApp):
@@ -578,21 +769,29 @@ class ReadingMasteryApp(MDApp):
         return Builder.load_string(KV)
 
     def open_local_pdf(self, filename):
-        # Use os.path.dirname(__file__) to find the folder regardless of OS
-        base_path = os.path.dirname(__file__)
-        # Use this for Android/Linux compatibility
-        assets_path = os.path.join(os.path.dirname(__file__), "assets")
-        
-        filepath = os.path.join(assets_path, filename)
-        if os.path.exists(filepath):
-            webbrowser.open(filepath)
-        else:
+        """Open PDF file - on Android this will need special handling"""
+        # For now, just show a message on Android
+        if platform == 'android':
             self.dialog = MDDialog(
-                title="File Not Found",
-                text=f"Cannot find {filename} in assets folder.",
+                title="Info",
+                text=f"PDF viewing on Android requires additional setup. File: {filename}",
                 buttons=[MDFlatButton(text="OK", on_release=lambda x: self.dialog.dismiss())]
             )
             self.dialog.open()
+        else:
+            base_path = os.path.dirname(__file__)
+            assets_path = os.path.join(base_path, "assets")
+            filepath = os.path.join(assets_path, filename)
+            if os.path.exists(filepath):
+                import webbrowser
+                webbrowser.open(filepath)
+            else:
+                self.dialog = MDDialog(
+                    title="File Not Found",
+                    text=f"Cannot find {filename} in assets folder.",
+                    buttons=[MDFlatButton(text="OK", on_release=lambda x: self.dialog.dismiss())]
+                )
+                self.dialog.open()
 
     def start_speed_test(self, passage):
         self.current_passage = passage
@@ -711,7 +910,7 @@ MDCard:
             item = TwoLineAvatarIconListItem(
                 text=b['title'],
                 secondary_text="Buy on Amazon.in",
-                on_release=lambda x, url=b['link']: webbrowser.open(url)
+                on_release=lambda x, url=b['link']: open_url(url)
             )
             check = RightCheckbox(selected_color=(0.15, 0.18, 0.45, 1))
             check.bind(active=self.on_checkbox_active)
@@ -731,9 +930,4 @@ MDCard:
         else: self.root.current = 'welcome'
 
 if __name__ == '__main__':
-
     ReadingMasteryApp().run()
-
-
-
-
