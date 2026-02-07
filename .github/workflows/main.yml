@@ -9,10 +9,13 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Build with Buildozer
-        uses: ArtemSBulgakov/buildozer-action@v1
+        # This action is specifically maintained for Kivy/KivyMD
+        uses: kivymd/kivymd-action@master
         with:
           buildozer_version: master
-          workdir: .
+          python_version: 3.11
+          # This command ensures we skip the broken permission check
+          command: buildozer android debug
 
       - name: Upload APK
         uses: actions/upload-artifact@v4
