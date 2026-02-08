@@ -39,8 +39,9 @@ jobs:
 
       - name: Install Buildozer
         run: |
-          pip install buildozer
+          pip install buildozer python-for-android==2023.09.16
           pip install cython==0.29.36
+
 
       - name: Force Android NDK r25b
         run: |
