@@ -1,54 +1,32 @@
 [app]
+
 title = Reading Mastery
 package.name = readingmastery
-package.domain = org.srivishnu
-
+package.domain = org.reading
 source.dir = .
-source.include_exts = py,png,jpg,kv,atlas,json,ttf,pdf
-
+source.include_exts = py,png,jpg,kv,atlas,json,db,pdf
 version = 0.1
 
+# Fixed requirements - Kivy 2.3.0 and kivymd without version
 requirements = python3,kivy==2.3.0,android,pillow,pyjnius,kivymd
-p4a.branch = develop
+
+# CRITICAL: Use master branch which has libffi fixes for newer systems
+p4a.branch = master
 
 orientation = portrait
 fullscreen = 0
 
-icon.filename = %(source.dir)s/icon.png
-presplash.filename = %(source.dir)s/presplash.png
-
-log_level = 2
-
-[buildozer]
-log_level = 2
-warn_on_root = 1
-
-[app:android]
-android.archs = arm64-v8a
-android.ndk = 25b
-android.api = 33
+android.permissions = INTERNET,WRITE_EXTERNAL_STORAGE,READ_EXTERNAL_STORAGE
+android.api = 31
 android.minapi = 21
 
-android.permissions = INTERNET
+# CRITICAL FIX: Force NDK r25b (not r28c which has libffi issues)
+android.ndk = 25b
 
-android.allow_backup = True
-android.debuggable = True
-
-android.gradle_dependencies =
-android.enable_androidx = True
-
-android.add_src =
-
-android.copy_libs = True
-
+android.archs = arm64-v8a,armeabi-v7a
 android.accept_sdk_license = True
 
-android.use_leakcanary = False
+[buildozer]
 
-[app:android.gradle]
-# Leave empty – buildozer handles this
-
-[app:android.activity]
-orientation = portrait
-
-[app:android.meta_data]
+log_level = 2
+warn_on_root = 1
