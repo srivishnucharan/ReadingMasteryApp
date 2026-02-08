@@ -43,8 +43,14 @@ jobs:
           echo ANDROID_NDK_HOME=$HOME/.buildozer/android/platform/android-ndk-r25b >> $GITHUB_ENV
           echo ANDROID_NDK_ROOT=$HOME/.buildozer/android/platform/android-ndk-r25b >> $GITHUB_ENV
 
+      - name: Install Android SDK Build Tools (AIDL fix)
+        run: |
+          yes | sdkmanager --licenses
+          sdkmanager "platform-tools" "build-tools;33.0.2" "platforms;android-33"
+
       - name: Build APK
         run: buildozer -v android debug
+
 
       - name: Upload APK
         uses: actions/upload-artifact@v4
