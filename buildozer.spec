@@ -9,6 +9,7 @@ source.include_exts = py,png,jpg,kv,atlas,json,ttf,pdf
 version = 0.1
 
 requirements = python3,kivy==2.3.0,android,pillow,pyjnius,kivymd
+p4a.branch = develop
 
 orientation = portrait
 fullscreen = 0
