@@ -1,96 +1,82 @@
-name: Build Android APK
-
-on:
+name: Build Android APK (Clean Build)
+on: 
   push:
-    branches:
-      - main
+    branches: [ main, master ]
+  workflow_dispatch:
 
 jobs:
-  build:
-    runs-on: ubuntu-24.04
-
+  build-android:
+    runs-on: ubuntu-latest
+    
     steps:
-      - name: Checkout repository
+      - name: Checkout Repository
         uses: actions/checkout@v4
 
-      - name: Set up Python 3.10
-        uses: actions/setup-python@v5
+      - name: Set up Python
+        uses: actions/setup-python@v4
         with:
-          python-version: "3.10"
+          python-version: '3.10'
 
-      - name: Install system dependencies
+      - name: Install System Dependencies
         run: |
-          sudo apt update
-          sudo apt install -y \
-            git zip unzip curl \
-            openjdk-17-jdk \
-            autoconf automake libtool \
-            pkg-config zlib1g-dev \
-            libncurses6
-
-          # Ubuntu 24 compatibility for python-for-android
-          if [ ! -f /usr/lib/x86_64-linux-gnu/libtinfo.so.5 ]; then
-            sudo ln -s /usr/lib/x86_64-linux-gnu/libncurses.so.6 \
-                       /usr/lib/x86_64-linux-gnu/libtinfo.so.5
-          fi
-
-      - name: Upgrade pip
-        run: python -m pip install --upgrade pip
+          sudo apt-get update
+          sudo apt-get install -y \
+            git zip unzip openjdk-17-jdk \
+            autoconf libtool pkg-config \
+            zlib1g-dev libncurses5-dev libncursesw5-dev \
+            libtinfo5 cmake libffi-dev libssl-dev
 
       - name: Install Buildozer
         run: |
-          pip install buildozer python-for-android==2023.09.16
-          pip install cython==0.29.36
+          pip3 install --upgrade pip
+          pip3 install --upgrade buildozer
+          pip3 install --upgrade cython==0.29.33
 
-
-      - name: Force Android NDK r25b
+      - name: Verify buildozer.spec
         run: |
-          echo ANDROID_NDK_HOME=$HOME/.buildozer/android/platform/android-ndk-r25b >> $GITHUB_ENV
-          echo ANDROID_NDK_ROOT=$HOME/.buildozer/android/platform/android-ndk-r25b >> $GITHUB_ENV
+          echo "=== Current buildozer.spec requirements ==="
+          grep "^requirements" buildozer.spec
+          echo ""
+          echo "=== Current buildozer.spec NDK ==="
+          grep "^android.ndk" buildozer.spec || echo "NDK not specified!"
+          echo ""
+          echo "=== Current buildozer.spec p4a.branch ==="
+          grep "^p4a.branch" buildozer.spec || echo "p4a.branch not specified!"
 
-      - name: Install Android SDK + sdkmanager (Buildozer compatible)
+      - name: Clean All Caches
         run: |
-          ANDROID_SDK_ROOT="$HOME/.buildozer/android/platform/android-sdk"
-          mkdir -p "$ANDROID_SDK_ROOT"
-
-          # Install cmdline-tools
-          mkdir -p "$ANDROID_SDK_ROOT/cmdline-tools"
-          curl -sSLo cmdline-tools.zip \
-            https://dl.google.com/android/repository/commandlinetools-linux-11076708_latest.zip
-          unzip -q cmdline-tools.zip -d "$ANDROID_SDK_ROOT/cmdline-tools"
-          mv "$ANDROID_SDK_ROOT/cmdline-tools/cmdline-tools" \
-             "$ANDROID_SDK_ROOT/cmdline-tools/latest"
-
-          # Create legacy tools/bin path for Buildozer
-          mkdir -p "$ANDROID_SDK_ROOT/tools/bin"
-          ln -sf "$ANDROID_SDK_ROOT/cmdline-tools/latest/bin/sdkmanager" \
-                 "$ANDROID_SDK_ROOT/tools/bin/sdkmanager"
-
-          export PATH="$ANDROID_SDK_ROOT/cmdline-tools/latest/bin:$ANDROID_SDK_ROOT/tools/bin:$ANDROID_SDK_ROOT/platform-tools:$PATH"
-
-          yes | sdkmanager --licenses
-          sdkmanager "platform-tools" "platforms;android-33" "build-tools;33.0.2"
-      
-      - name: Force Buildozer Android SDK & NDK (override GitHub defaults)
-        run: |
-          echo ANDROID_HOME=$HOME/.buildozer/android/platform/android-sdk >> $GITHUB_ENV
-          echo ANDROID_SDK_ROOT=$HOME/.buildozer/android/platform/android-sdk >> $GITHUB_ENV
-          echo ANDROID_NDK_HOME=$HOME/.buildozer/android/platform/android-ndk-r25b >> $GITHUB_ENV
-          echo ANDROID_NDK_ROOT=$HOME/.buildozer/android/platform/android-ndk-r25b >> $GITHUB_ENV
-          echo ANDROID_NDK=$HOME/.buildozer/android/platform/android-ndk-r25b >> $GITHUB_ENV
-      
-      - name: Clean build directories (CI safe)
-        run: |
+          echo "Removing .buildozer directory to force fresh build..."
           rm -rf .buildozer
-          rm -rf ~/.buildozer/android/platform/build-*
+          rm -rf bin
+          echo "Clean complete!"
 
-
-      - name: Build APK
+      - name: Build APK with Buildozer
+        id: buildozer_build
         run: |
           buildozer -v android debug
 
       - name: Upload APK
         uses: actions/upload-artifact@v4
+        if: success()
         with:
-          name: readingmastery-debug-apk
+          name: ReadingMastery-APK
           path: bin/*.apk
+          retention-days: 30
+
+      - name: Upload Build Logs on Failure
+        uses: actions/upload-artifact@v4
+        if: failure()
+        with:
+          name: build-logs-failure
+          path: |
+            .buildozer/
+          retention-days: 7
+
+      - name: Show Build Info
+        if: always()
+        run: |
+          echo "=== APK Files ==="
+          ls -lh bin/*.apk 2>/dev/null || echo "No APK files found"
+          echo ""
+          echo "=== NDK Used ==="
+          ls -d .buildozer/android/platform/android-ndk-* 2>/dev/null || echo "No NDK found"
