@@ -4,7 +4,7 @@ package.name = readingmastery
 package.domain = org.srivishnu
 
 source.dir = .
-source.include_exts = py,png,jpg,kv,atlas,json,ttf
+source.include_exts = py,png,jpg,kv,atlas,json,ttf,pdf
 
 version = 0.1
 
@@ -27,9 +27,6 @@ android.archs = arm64-v8a
 android.ndk = 25b
 android.api = 33
 android.minapi = 21
-
-
-android.archs = arm64-v8a
 
 android.permissions = INTERNET
 
