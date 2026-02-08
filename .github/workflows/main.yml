@@ -69,6 +69,14 @@ jobs:
 
           yes | sdkmanager --licenses
           sdkmanager "platform-tools" "platforms;android-33" "build-tools;33.0.2"
+      
+      - name: Force Buildozer Android SDK & NDK (override GitHub defaults)
+        run: |
+          echo ANDROID_HOME=$HOME/.buildozer/android/platform/android-sdk >> $GITHUB_ENV
+          echo ANDROID_SDK_ROOT=$HOME/.buildozer/android/platform/android-sdk >> $GITHUB_ENV
+          echo ANDROID_NDK_HOME=$HOME/.buildozer/android/platform/android-ndk-r25b >> $GITHUB_ENV
+          echo ANDROID_NDK_ROOT=$HOME/.buildozer/android/platform/android-ndk-r25b >> $GITHUB_ENV
+          echo ANDROID_NDK=$HOME/.buildozer/android/platform/android-ndk-r25b >> $GITHUB_ENV
 
       - name: Build APK
         run: |
