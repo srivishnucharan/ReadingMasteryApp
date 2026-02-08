@@ -79,10 +79,11 @@ jobs:
           echo ANDROID_NDK_ROOT=$HOME/.buildozer/android/platform/android-ndk-r25b >> $GITHUB_ENV
           echo ANDROID_NDK=$HOME/.buildozer/android/platform/android-ndk-r25b >> $GITHUB_ENV
       
-      - name: Clean previous build
+      - name: Clean build directories (CI safe)
         run: |
-          buildozer android clean
-          rm -rf .buildozer/android/platform/build-*
+          rm -rf .buildozer
+          rm -rf ~/.buildozer/android/platform/build-*
+
 
       - name: Build APK
         run: |
