@@ -7,7 +7,7 @@ source.include_exts = py,png,jpg,kv,atlas,pdf,json,db
 version = 0.1
 
 # Fixed requirements - correct versions and added missing dependencies
-requirements = python3,kivy==2.3.0,kivymd==1.1.1,pillow,pyjnius,sqlite3,certifi
+requirements = python3,kivy==2.3.0,pillow,pyjnius,android,kivymd
 
 # Android-specific settings
 orientation = portrait
@@ -32,3 +32,4 @@ android.ndk = 25b
 [buildozer]
 log_level = 2
 warn_on_root = 1
+
