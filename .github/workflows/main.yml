@@ -13,7 +13,7 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Setup Python
+      - name: Set up Python 3.10
         uses: actions/setup-python@v5
         with:
           python-version: "3.10"
@@ -21,10 +21,14 @@ jobs:
       - name: Install system dependencies
         run: |
           sudo apt update
-          sudo apt install -y git zip unzip openjdk-17-jdk \
-            autoconf automake libtool pkg-config zlib1g-dev \
+          sudo apt install -y \
+            git zip unzip curl \
+            openjdk-17-jdk \
+            autoconf automake libtool \
+            pkg-config zlib1g-dev \
             libncurses6
 
+          # Ubuntu 24 compatibility for python-for-android
           if [ ! -f /usr/lib/x86_64-linux-gnu/libtinfo.so.5 ]; then
             sudo ln -s /usr/lib/x86_64-linux-gnu/libncurses.so.6 \
                        /usr/lib/x86_64-linux-gnu/libtinfo.so.5
@@ -43,29 +47,27 @@ jobs:
           echo ANDROID_NDK_HOME=$HOME/.buildozer/android/platform/android-ndk-r25b >> $GITHUB_ENV
           echo ANDROID_NDK_ROOT=$HOME/.buildozer/android/platform/android-ndk-r25b >> $GITHUB_ENV
 
-      - name: Install Android SDK Build Tools (AIDL fix)
-        run: |
-          yes | sdkmanager --licenses
-          sdkmanager "platform-tools" "build-tools;33.0.2" "platforms;android-33"
-
-      - name: Build APK
-        run: buildozer -v android debug
-
-      - name: Install Android SDK cmdline-tools + build-tools
+      - name: Install Android SDK cmdline-tools and build-tools
         run: |
           ANDROID_SDK_ROOT="$HOME/.buildozer/android/platform/android-sdk"
           mkdir -p "$ANDROID_SDK_ROOT/cmdline-tools"
 
-          curl -o cmdline-tools.zip https://dl.google.com/android/repository/commandlinetools-linux-11076708_latest.zip
+          curl -sSLo cmdline-tools.zip \
+            https://dl.google.com/android/repository/commandlinetools-linux-11076708_latest.zip
+
           unzip -q cmdline-tools.zip -d "$ANDROID_SDK_ROOT/cmdline-tools"
+
           mv "$ANDROID_SDK_ROOT/cmdline-tools/cmdline-tools" \
              "$ANDROID_SDK_ROOT/cmdline-tools/latest"
 
           export PATH="$ANDROID_SDK_ROOT/cmdline-tools/latest/bin:$ANDROID_SDK_ROOT/platform-tools:$PATH"
 
           yes | sdkmanager --licenses
-          sdkmanager "platform-tools" "build-tools;33.0.2" "platforms;android-33"
- 
+          sdkmanager "platform-tools" "platforms;android-33" "build-tools;33.0.2"
+
+      - name: Build APK
+        run: |
+          buildozer -v android debug
 
       - name: Upload APK
         uses: actions/upload-artifact@v4
