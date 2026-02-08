@@ -2,57 +2,45 @@ name: Build Android APK
 
 on:
   push:
-    branches:
-      - main
+    branches: [ "main" ]
 
 jobs:
   build:
     runs-on: ubuntu-24.04
 
     steps:
-      - name: Checkout repo
+      - name: Checkout source
         uses: actions/checkout@v4
 
-      - name: Set up Python
+      - name: Set up Python 3.10
         uses: actions/setup-python@v5
         with:
           python-version: "3.10"
 
-      - name: Install system dependencies
-  run: |
-    sudo apt update
-    sudo apt install -y \
-      git zip unzip openjdk-17-jdk \
-      autoconf automake libtool \
-      pkg-config zlib1g-dev \
-      libncurses6
+      - name: Install system dependencies (NO libncurses5)
+        run: |
+          sudo apt update
+          sudo apt install -y \
+            git zip unzip \
+            openjdk-17-jdk \
+            autoconf automake libtool \
+            pkg-config zlib1g-dev \
+            libncurses6
 
-    # Create libtinfo.so.5 compatibility link (required by python-for-android)
-    if [ ! -f /usr/lib/x86_64-linux-gnu/libtinfo.so.5 ]; then
-      sudo ln -s /usr/lib/x86_64-linux-gnu/libncurses.so.6 \
-                 /usr/lib/x86_64-linux-gnu/libtinfo.so.5
-    fi
+          # Ubuntu 24 fix for python-for-android (libtinfo.so.5)
+          if [ ! -f /usr/lib/x86_64-linux-gnu/libtinfo.so.5 ]; then
+            sudo ln -s /usr/lib/x86_64-linux-gnu/libncurses.so.6 \
+                       /usr/lib/x86_64-linux-gnu/libtinfo.so.5
+          fi
 
-          # Fix libtinfo5 missing issue (Ubuntu 24)
-          sudo ln -sf /usr/lib/x86_64-linux-gnu/libncurses.so.6 /usr/lib/x86_64-linux-gnu/libtinfo.so.5
+      - name: Upgrade pip
+        run: python -m pip install --upgrade pip
 
       - name: Install Buildozer
         run: |
-          python -m pip install --upgrade pip
-          pip install buildozer cython==0.29.36
+          pip install buildozer
+          pip install cython==0.29.36
 
-      - name: Force correct Android NDK
+      - name: Force Android NDK r25b
         run: |
-          echo "ANDROID_NDK_HOME=$HOME/.buildozer/android/platform/android-ndk-r25b" >> $GITHUB_ENV
-          echo "ANDROID_NDK_ROOT=$HOME/.buildozer/android/platform/android-ndk-r25b" >> $GITHUB_ENV
-
-      - name: Build APK
-        run: |
-          buildozer android debug
-
-      - name: Upload APK
-        uses: actions/upload-artifact@v4
-        with:
-          name: ReadingMastery-debug-apk
-          path: bin/*.apk
-    
+          echo "ANDROID_ND_
