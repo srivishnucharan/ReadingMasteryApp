@@ -19,13 +19,19 @@ jobs:
           python-version: "3.10"
 
       - name: Install system dependencies
-        run: |
-          sudo apt update
-          sudo apt install -y \
-            git zip unzip openjdk-17-jdk \
-            autoconf automake libtool \
-            pkg-config zlib1g-dev \
-            libncurses5
+  run: |
+    sudo apt update
+    sudo apt install -y \
+      git zip unzip openjdk-17-jdk \
+      autoconf automake libtool \
+      pkg-config zlib1g-dev \
+      libncurses6
+
+    # Create libtinfo.so.5 compatibility link (required by python-for-android)
+    if [ ! -f /usr/lib/x86_64-linux-gnu/libtinfo.so.5 ]; then
+      sudo ln -s /usr/lib/x86_64-linux-gnu/libncurses.so.6 \
+                 /usr/lib/x86_64-linux-gnu/libtinfo.so.5
+    fi
 
           # Fix libtinfo5 missing issue (Ubuntu 24)
           sudo ln -sf /usr/lib/x86_64-linux-gnu/libncurses.so.6 /usr/lib/x86_64-linux-gnu/libtinfo.so.5
