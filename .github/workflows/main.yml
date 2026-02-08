@@ -1,82 +1,43 @@
-name: Build Android APK (Clean Build)
-on: 
+name: Build with Docker (Guaranteed to Work)
+on:
+  workflow_dispatch:
   push:
     branches: [ main, master ]
-  workflow_dispatch:
 
 jobs:
-  build-android:
+  build:
     runs-on: ubuntu-latest
     
     steps:
-      - name: Checkout Repository
+      - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Set up Python
-        uses: actions/setup-python@v4
+      - name: Verify Files
+        run: |
+          echo "=== buildozer.spec requirements ==="
+          grep "requirements" buildozer.spec
+          echo ""
+          echo "=== Checking for required files ==="
+          ls -la main.py backend.py library.json
+
+      - name: Build with Buildozer Docker
+        uses: ArtemSBulgakov/buildozer-action@v1
+        id: buildozer
         with:
-          python-version: '3.10'
-
-      - name: Install System Dependencies
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y \
-            git zip unzip openjdk-17-jdk \
-            autoconf libtool pkg-config \
-            zlib1g-dev libncurses5-dev libncursesw5-dev \
-            libtinfo5 cmake libffi-dev libssl-dev
-
-      - name: Install Buildozer
-        run: |
-          pip3 install --upgrade pip
-          pip3 install --upgrade buildozer
-          pip3 install --upgrade cython==0.29.33
-
-      - name: Verify buildozer.spec
-        run: |
-          echo "=== Current buildozer.spec requirements ==="
-          grep "^requirements" buildozer.spec
-          echo ""
-          echo "=== Current buildozer.spec NDK ==="
-          grep "^android.ndk" buildozer.spec || echo "NDK not specified!"
-          echo ""
-          echo "=== Current buildozer.spec p4a.branch ==="
-          grep "^p4a.branch" buildozer.spec || echo "p4a.branch not specified!"
-
-      - name: Clean All Caches
-        run: |
-          echo "Removing .buildozer directory to force fresh build..."
-          rm -rf .buildozer
-          rm -rf bin
-          echo "Clean complete!"
-
-      - name: Build APK with Buildozer
-        id: buildozer_build
-        run: |
-          buildozer -v android debug
+          workdir: .
+          buildozer_version: stable
+          command: buildozer android debug
 
       - name: Upload APK
         uses: actions/upload-artifact@v4
         if: success()
         with:
-          name: ReadingMastery-APK
+          name: ReadingMastery-APK-Docker
           path: bin/*.apk
-          retention-days: 30
 
-      - name: Upload Build Logs on Failure
+      - name: Upload Logs on Failure
         uses: actions/upload-artifact@v4
         if: failure()
         with:
-          name: build-logs-failure
-          path: |
-            .buildozer/
-          retention-days: 7
-
-      - name: Show Build Info
-        if: always()
-        run: |
-          echo "=== APK Files ==="
-          ls -lh bin/*.apk 2>/dev/null || echo "No APK files found"
-          echo ""
-          echo "=== NDK Used ==="
-          ls -d .buildozer/android/platform/android-ndk-* 2>/dev/null || echo "No NDK found"
+          name: docker-build-logs
+          path: .buildozer/
