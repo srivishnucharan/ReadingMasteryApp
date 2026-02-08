@@ -11,20 +11,34 @@ ALL_GENRES = [
 
 def get_allowed_genres(age_group):
     """Filters which genres the user sees based on their age group."""
-    if age_group == "8-10":
-        return ALL_GENRES[:5] # Mystery, Fantasy, Science, History, Biography
-    elif age_group == "11-14":
-        return ALL_GENRES[:10] # Top 10, no Romance
-    elif age_group == "15-21":
-        return [g for g in ALL_GENRES if g != "Romance"]
+    if age_group == "5-7":
+        return ALL_GENRES[:5]  # Mystery, Fantasy, Science, History, Biography
+    elif age_group == "8-10":
+        return ALL_GENRES[:10]  # Top 10, no Romance
+    elif age_group == "11-13":
+        return ALL_GENRES[:12]  # Most genres, no Romance/Poetry
+    elif age_group == "14+":
+        return ALL_GENRES  # All genres
     else:
-        return ALL_GENRES
+        return ALL_GENRES[:5]  # Default for unknown age groups
+
+# Mapping between UI level names and JSON level names
+LEVEL_MAPPING = {
+    "Beginner": "Novice",
+    "Intermediate": "Intermediate",
+    "Advanced": "Advanced",
+    "Expert": "Advanced"  # Expert maps to Advanced in the JSON
+}
 
 def get_books_for_selection(age_group, genre, level):
     """
     Pure JSON Pull:
     Finds library.json, loads it, and returns books for the specific Genre and Level.
+    Maps the UI level names to JSON level names.
     """
+    # Map the UI level to JSON level
+    json_level = LEVEL_MAPPING.get(level, "Novice")
+    
     # Locates the library.json in the same folder as this script
     file_path = os.path.join(os.path.dirname(__file__), 'library.json')
     
@@ -38,7 +52,7 @@ def get_books_for_selection(age_group, genre, level):
             
         # Drill down: database -> Genre (e.g. "Fantasy") -> Level (e.g. "Novice")
         genre_data = database.get(genre, {})
-        books = genre_data.get(level, [])
+        books = genre_data.get(json_level, [])
         
         # Returns the list found in JSON (Empty list if keys don't match)
         return books
