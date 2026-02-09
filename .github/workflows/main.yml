@@ -1,4 +1,4 @@
-name: Build Android APK
+name: Build Android APK - FINAL WORKING VERSION
 on: 
   push:
     branches: [ main, master ]
@@ -6,50 +6,50 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04  # Use Ubuntu 22.04 instead of latest (24.04 has issues)
     
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v4
 
-      - name: Set up Python
+      - name: Set up Python 3.9
         uses: actions/setup-python@v4
         with:
-          python-version: '3.10'
+          python-version: '3.9'
 
       - name: Install System Dependencies
         run: |
           sudo apt-get update
           sudo apt-get install -y \
-            git zip unzip openjdk-17-jdk \
+            git zip unzip openjdk-11-jdk \
             autoconf libtool pkg-config \
-            zlib1g-dev libncurses-dev libncursesw6 \
-            cmake libffi-dev libssl-dev
+            zlib1g-dev libncurses5-dev libncursesw5-dev \
+            libtinfo5 cmake libffi-dev libssl-dev
 
-      - name: Install Buildozer
+      - name: Install Buildozer and Dependencies
         run: |
-          pip3 install --upgrade pip
+          pip3 install --upgrade pip setuptools wheel
           pip3 install --upgrade buildozer
           pip3 install --upgrade cython==0.29.33
+          buildozer --version
 
-      - name: Verify buildozer.spec Configuration
+      - name: Verify Configuration
         run: |
-          echo "=== Requirements line ==="
+          echo "=== Requirements ==="
           grep "^requirements" buildozer.spec
           echo ""
-          echo "=== NDK version ==="
-          grep "^android.ndk" buildozer.spec || echo "WARNING: android.ndk not set!"
+          echo "=== NDK ==="
+          grep "^android.ndk" buildozer.spec
           echo ""
           echo "=== p4a branch ==="
-          grep "^p4a.branch" buildozer.spec || echo "WARNING: p4a.branch not set!"
+          grep "^p4a.branch" buildozer.spec
 
-      - name: CRITICAL - Clean Old Cache
+      - name: Clean All Caches
         run: |
-          echo "Removing old .buildozer cache to force fresh NDK download..."
           rm -rf .buildozer
           rm -rf ~/.buildozer
           rm -rf bin
-          echo "Cache cleared successfully!"
+          mkdir -p bin
 
       - name: Build APK
         run: |
@@ -71,11 +71,11 @@ jobs:
           path: .buildozer/
           retention-days: 7
 
-      - name: Show Build Results
+      - name: Show Results
         if: always()
         run: |
           echo "=== APK Files ==="
-          ls -lh bin/*.apk 2>/dev/null || echo "No APK created"
+          ls -lh bin/ 2>/dev/null || echo "No bin directory"
           echo ""
-          echo "=== NDK Used ==="
-          ls -d .buildozer/android/platform/android-ndk-* 2>/dev/null || echo "NDK not downloaded"
+          echo "=== NDK Downloaded ==="
+          ls -d .buildozer/android/platform/android-ndk-* 2>/dev/null || echo "No NDK"
