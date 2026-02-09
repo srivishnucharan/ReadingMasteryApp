@@ -27,7 +27,7 @@ LEVEL_MAPPING = {
     "Beginner": "Novice",
     "Intermediate": "Intermediate",
     "Advanced": "Advanced",
-    "Expert": "Advanced"
+    "Expert": "Advanced"  # Expert maps to Advanced in the JSON
 }
 
 def get_books_for_selection(age_group, genre, level):
@@ -69,4 +69,3 @@ def init_db():
         (id INTEGER PRIMARY KEY, age TEXT, level TEXT, points INTEGER)''')
     conn.commit()
     conn.close()
-
